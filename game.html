@@ -3,27 +3,62 @@
 <title>Sxy Mufns' Game</title>
 
 <link rel="stylesheet" href="style.css">
-<script src="debounce.js"></script>
-
 <script>
 game = {}
+</script>
+<script src="debounce.js"></script>
+<script src="audio.js"></script>
 
-resize = Cowboy.debounce(1, function()
-{
-game.screen.width = window.innerWidth*0.97; game.screen.height=window.innerHeight*0.97;
-game.screen.getContext("2d").drawImage(game.nebula, 0, 0, game.screen.width, game.screen.height)
+<script src="space.js"></script>
+<script src="planet.js"></script>
+
+<script>
+
+function dickcloud() {
+  function font() {
+    return Math.floor((Math.random()*30 + 3)) + "px serif";
+  }
+  c = game.canvas.getContext('2d')
+  limit = Math.random()*500
+  for(i=0; i<limit; i++) {
+    c.font = font();
+    c.fillText("Dicks", Math.random()*game.canvas.width, Math.random()*game.canvas.height)
+  }
+}
+
+resize = Cowboy.debounce(1, function() {
+  game.canvas.width = window.innerWidth*0.97;
+  game.canvas.height= window.innerHeight*0.97;
+  //		game.screen.draw()
+  dickcloud()
+  //game.canvas.getContext("2d").drawImage(game.nebula, 0, 0, game.canvas.width, game.canvas.height)
 });
+
+draw = function() {
+  game.screen.draw();
+hs}
+
+loop = function() {
+  draw();
+  
+}
 
 window.addEventListener("resize", resize)
 window.addEventListener("load", function ()
 {
-game.screen = document.getElementById("screen");
+game.canvas = document.getElementById("screen");
 
-game.nebula = document.createElement("img")
-game.nebula.src = "http://www.professorcloud.com/images/nebula/nebula.jpg"
+//game.screen = SpaceScreen
+//game.nebula = document.createElement("img")
+//game.nebula.src = "http://www.professorcloud.com/images/nebula/nebula.jpg"
 
 resize()
+
+//game.soundtrack.src = "http://kousu.ca/radio/mpd" //easy test! this should buffer and start autoplaying this file
+dickcloud()
 });
+
+
 </script>
 
 </head>
