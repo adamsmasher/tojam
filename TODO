@@ -3,3 +3,23 @@
 Bug Logan and Annamaria for Graphics
 
 See if audio can come as data urls. And if so, can we just embed the soundtrack as strings?
+
+Cloud effects
+Tiling map engine
+Space screen!!!!!!!!
+
+
+Audio:
+ -find an empty audio channel and play on it (or stop a previous channel and repurpose it?)
+ -soundtrack channel
+  (do screens come with soundtracks?)
+
+Upgrade tree / simulation logic
+
+
+
+
+javascripts:
+ -use addEventListener not setting onclick
+ -use appendChild() not insertBefore
+ use (function() { ... })(); to create a private namespace
