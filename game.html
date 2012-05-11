@@ -1,0 +1,38 @@
+<html>
+<head>
+<title>Sxy Mffins' Game</title>
+
+<script>
+game = {}
+
+window.onresize = function()
+{
+game.screen.width = window.innerWidth; game.screen.height=window.innerHeight;
+game.screen.getContext("2d").drawImage(game.nebula, 0, 0, game.screen.width, game.screen.height)
+}
+
+
+function load()
+{
+game.screen = document.getElementById("screen");
+
+game.nebula = document.createElement("img")
+game.nebula.src = "http://www.professorcloud.com/images/nebula/nebula.jpg"
+
+}
+</script>
+
+</head>
+<body width=100% onload="load()">
+
+<center>
+
+<!-- todo: autosize the canvas?? -->
+
+<canvas id="screen" width="800" height="600">
+ Sorry! You need a modern browser (e.g. Chrome or Firefox) to play this game! No flash though :)
+</canvas>
+</center>
+
+</body>
+</html>
