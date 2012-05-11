@@ -1,0 +1,35 @@
+<html>
+<head>
+<title>Audio Tag Test</title>
+
+<script>
+
+game = {}
+
+function gen()
+{
+  game.soundtrack = document.createElement("audio")
+  game.soundtrack.setAttribute("id", "soundtrack")
+  game.soundeffects = []
+  for(i=0; i<32; i++)
+    { 
+     game.soundeffects.push(document.createElement("audio"))
+    }   
+}
+</script>
+
+</head>
+<body onload="gen()">
+
+<!-- controls makes controls appear. without it it's hidden -->
+<!-- first result on ddg: 
+ http://www.storiesinflight.com/html5/audio.html
+ suggests we just have like, a bunch of audio tags and treat each as a channel
+  limitation: play
+ -->
+<audio src="good_enough.mp3" controls>
+DICKS
+</audio>
+
+</body>
+</html>
