@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Sxy Mffins' Game</title>
+<title>Sxy Mufns' Game</title>
 
 <link rel="stylesheet" href="style.css">
 <script src="debounce.js"></script>
@@ -8,31 +8,30 @@
 <script>
 game = {}
 
-window.onresize = Cowboy.debounce(1, function()
+resize = Cowboy.debounce(1, function()
 {
 game.screen.width = window.innerWidth*0.97; game.screen.height=window.innerHeight*0.97;
 game.screen.getContext("2d").drawImage(game.nebula, 0, 0, game.screen.width, game.screen.height)
 });
 
-
-function load()
+window.addEventListener("resize", resize)
+window.addEventListener("load", function ()
 {
 game.screen = document.getElementById("screen");
 
 game.nebula = document.createElement("img")
 game.nebula.src = "http://www.professorcloud.com/images/nebula/nebula.jpg"
 
-}
+resize()
+});
 </script>
 
 </head>
-<body width=100% onload="load()">
+<body>
 
 <center>
 
-<!-- todo: autosize the canvas?? -->
-
-<canvas id="screen" width="800" height="600">
+<canvas id="screen">
  Sorry! You need a modern browser (e.g. Chrome or Firefox) to play this game! No flash though :)
 </canvas>
 </center>
