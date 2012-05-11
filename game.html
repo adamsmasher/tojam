@@ -2,14 +2,16 @@
 <head>
 <title>Sxy Mffins' Game</title>
 
+<script src="debounce.js"></script>
+
 <script>
 game = {}
 
-window.onresize = function()
+window.onresize = Cowboy.debounce(1, function()
 {
 game.screen.width = window.innerWidth; game.screen.height=window.innerHeight;
 game.screen.getContext("2d").drawImage(game.nebula, 0, 0, game.screen.width, game.screen.height)
-}
+});
 
 
 function load()
