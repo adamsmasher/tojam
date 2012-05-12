@@ -4,6 +4,7 @@ Images = function() {
   };
 
   imgs.tiles.src = "tiles.png";
+  imgs.tiles.tilesPerRow = 8;
 
   return imgs;
 }()
