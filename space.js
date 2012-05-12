@@ -18,7 +18,7 @@ Star = function() {
    lum: randint(1,4),
    
    twinkle: randint(0,9),
-   period: randint(1,4)
+   period: randint(1,5)*2
   }
 }
 
@@ -40,7 +40,7 @@ SpaceScene = function() {
     //twinklesine_table.push(Math.round(Math.sin(p)*17));
   }
   function twinklesine(i) {
-    return Math.sin(Math.PI*2*i/100) * 25 / 100;
+    return Math.sin(Math.PI*2*i/500) * 25 / 100;
     return twinklesine_table[i % twinklesine_table.length] / 10;
     
   }
