@@ -1,4 +1,3 @@
-
 //Implements the space screen
 
 // XXX TODO: the wrap-around code is incomplete. the whole thing wraps when it gets to -STARFIELD_WIDTH, but it should also wrap the coordinates of stars that have already passed the boundary
@@ -6,15 +5,16 @@
 //To render text:
 
 /* lum is the inherent luminosity of the star
-   twinkle is the current offset from the base luminosity, and it ranges through 9 possible levels at a rate of period
- */
+   twinkle is the current offset from the base luminosity, and it ranges
+   through 9 possible levels at a rate of period
+*/
 
-STARFIELD_WIDTH = 1000
-STARFIELD_HEIGHT = 800
+STARFIELD_WIDTH = 1000;
+STARFIELD_HEIGHT = 800;
 
 /* todo: params on this (number of stars, rates) should be configurable */
 Starfield = function() {
-  Star = function() {   //to handle resizing nicely, the stars are stored as offsets from the *center* of the screen
+  function Star() {   //to handle resizing nicely, the stars are stored as offsets from the *center* of the screen
     return {
       x: Util.randint(-STARFIELD_WIDTH, STARFIELD_WIDTH),
       y: Util.randint(-STARFIELD_HEIGHT, STARFIELD_HEIGHT),
@@ -26,10 +26,8 @@ Starfield = function() {
     }
   }
   
-
   function twinklesine(i) {
-    return Math.sin(Math.PI*2*i/500) * 25 / 100;
-    
+    return Math.sin(Math.PI*2*i/500) * 25 / 100;  
   }
   //precomputing option:
   //twinklesine_table = []
@@ -37,27 +35,27 @@ Starfield = function() {
   //  twinklesine_table.push(Math.round(Math.sin(p)*17));
   //}
 
-  starfield = {zoom: 1} //TODO: should listen to the zoom
+  var starfield = {zoom: 1}; //TODO: should listen to the zoom
   
-  narquee = 0 //the offset of the marqueeing starfield
+  var narquee = 0 //the offset of the marqueeing starfield
   
-  stars = []
-  stars_n = Math.floor(350+Math.random()*350)
+  var stars = [];
+  var stars_n = Math.floor(350+Math.random()*350);
   //stars_n = 1
   for(i=0; i<stars_n; i++) {
-    stars.push(Star())
+    stars.push(Star());
   }
     
   starfield.draw = function() {
-    ctx = game.canvas.getContext('2d')
-    ctx.save()
+    var ctx = game.canvas.getContext('2d')
+    ctx.save();
     ctx.globalAlpha = 1; //IMPORTANT, or else the previous draw won't work right
     ctx.fillStyle = "black";
     ctx.fillRect(0,0, game.canvas.width, game.canvas.height)
     
     //draw stars
     ctx.fillStyle = "white" //white for stars!
-    midpoint = {x: Math.floor(game.canvas.width / 2), y: Math.floor(game.canvas.height / 2)}
+    var midpoint = {x: Math.floor(game.canvas.width / 2), y: Math.floor(game.canvas.height / 2)}
     
     function drawStar(s) {
       x = s.x + midpoint.x + narquee //todo: offset this by the current scroll value + wrap around
@@ -75,7 +73,7 @@ Starfield = function() {
   
   starfield.update = function() {
       for(var i in stars) {
-        s = stars[i]
+        var s = stars[i]
         s.twinkle = (s.twinkle+s.period)
       }
       narquee-=.1;
@@ -88,8 +86,7 @@ Starfield = function() {
 
 
 SpaceScene = function() { 
-  
-  starfield = Starfield()  
+  var starfield = Starfield();
   game.soundtrack.src = "space.ogg";
 
   return {

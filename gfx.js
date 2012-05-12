@@ -7,7 +7,7 @@ Gfx = function() {
   }
 
   function fillCircle(x,y,radius) {
-    ctx = getCtx()
+    var ctx = getCtx()
     ctx.beginPath()
     ctx.arc(x, y, radius, 0, 2*Math.PI)
     ctx.closePath()
