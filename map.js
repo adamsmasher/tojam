@@ -38,7 +38,7 @@ Maps = (function() {
 
       col = col % map.width;
       if(col < 0)
-        col = 32 - col;
+        col = 32 + col;
 
       tilemap[row * map.width + col] = tile;
     }
