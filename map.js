@@ -1,7 +1,6 @@
-
 // requires Gfx, Keys, Images, Map
 
-Maps = (function(){
+Maps = (function() {
   function Tile(name, id) { return { name: name, id: id} }
   var TileTypes = [Tile("Grass", 0), Tile("Water", 1)] //used as an associative array!
 
@@ -35,10 +34,10 @@ Maps = (function(){
  
    img.src = path;
    */   
-       map.height = 32;
-       map.width = 32;
-       var tilemap = new Array(map.height*map.width) //row-major order!
-       for(var p = 0; p < tilemap.length; p++) tilemap[p] = 0
+    map.height = 32;
+    map.width = 32;
+    var tilemap = new Array(map.height*map.width); //row-major order!
+    for(var p = 0; p < tilemap.length; p++) tilemap[p] = 0
        /*for(var row = 0; row < map.height; row++) {
          tilemap[row] = new Array(map.width);
          for(var col = 0; col < map.width; col++) {
@@ -66,5 +65,3 @@ Maps = (function(){
 
   return { TileTypes: TileTypes, Map: Map }
 })();
-
-    

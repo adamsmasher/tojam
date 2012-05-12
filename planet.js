@@ -1,13 +1,12 @@
-
 //a Scene that renders the world
 
 //scenes contain viewport
 
 Planet = function(world) {
-  var scrollY = 0
-  var scrollX = 0
-  var scrollDY = 0
-  var scrollDX = 0
+  var scrollY = 0;
+  var scrollX = 0;
+  var scrollDY = 0;
+  var scrollDX = 0;
   
   function click(x,y) {
     //TODO: translate the click into a click on the world (need to factor in the viewport)
@@ -22,16 +21,24 @@ Planet = function(world) {
     //if(scrollX < 0) scrollX = 0;
     if(scrollY < 0) scrollY = 0;
     //if(scrollX > world.map.width*Gfx.tileWidth-Gfx.screenWidth()) scrollX = world.map.width*Gfx.tileWidth-Gfx.screenWidth()
-    if(scrollY > world.map.height*Gfx.tileHeight-Gfx.screenHeight()) scrollY = world.map.height*Gfx.tileHeight-Gfx.screenHeight()
+    if(scrollY > world.map.height*Gfx.tileHeight-Gfx.screenHeight()) {
+      scrollY = world.map.height*Gfx.tileHeight-Gfx.screenHeight();
+    }
   }
 
   //this is the number of tiles available onscreen at any moment
-  var viewable_tiles = {width: Gfx.screenWidth() / Gfx.tileWidth, height: Gfx.screenHeight() / Gfx.tileHeight}
+  var viewable_tiles = {
+    width: Gfx.screenWidth() / Gfx.tileWidth,
+    height: Gfx.screenHeight() / Gfx.tileHeight
+  }
   
   function draw() {
     //a world *has* to come with a map
-    if(!world.map) { console.error("World `"+world.toString()+"` has no map!"); return}
-    Gfx.clearScreen()
+    if(!world.map) {
+      console.error("World `" + world.toString() + "` has no map!");
+      return;
+    }
+    Gfx.clearScreen();
     
     //draw map
     //XXX map should wrap horizontally but not vertically <-- loren can do this
@@ -42,7 +49,7 @@ Planet = function(world) {
         row <= startRow + viewable_tiles.height+1;
         row++, screenY += Gfx.tileHeight) {
       for(var col = startCol, screenX = -(scrollX % Gfx.tileWidth)-Gfx.tileWidth;
-          col <= startCol + viewable_tiles.width+1; //+1 to catch the edge
+          col <= startCol + viewable_tiles.width + 1; //+1 to catch the edge
           col++, screenX += Gfx.tileWidth) {
         //try {
         drawTile(world.map.tileAt(row,col), screenX, screenY);
@@ -64,7 +71,8 @@ Planet = function(world) {
     var ctx = Gfx.getCtx();
     var sx = Gfx.tileWidth * (T.id % Images.tiles.tilesPerRow);
     var sy = Gfx.tileHeight * Math.floor(T.id / Images.tiles.tilesPerRow);
-    ctx.drawImage(Images.tiles, sx, sy, Gfx.tileWidth, Gfx.tileHeight, dx, dy, Gfx.tileWidth, Gfx.tileHeight);
+    ctx.drawImage(Images.tiles, sx, sy, Gfx.tileWidth, Gfx.tileHeight,
+      dx, dy, Gfx.tileWidth, Gfx.tileHeight);
   }
 
 
@@ -87,8 +95,10 @@ Planet = function(world) {
     if(evt.keyCode == Keys.DOM_VK_UP || evt.keyCode == Keys.DOM_VK_DOWN) {
       scrollDY = 0;
     }
-  else if(evt.keyCode == Keys.DOM_VK_LEFT || evt.keyCode == Keys.DOM_VK_RIGHT) {
-      scrollDX = 0;                                                                                                                                       
+    else if(evt.keyCode == Keys.DOM_VK_LEFT ||
+            evt.keyCode == Keys.DOM_VK_RIGHT)
+    {
+      scrollDX = 0;
     }
   }
          

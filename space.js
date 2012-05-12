@@ -1,4 +1,3 @@
-
 //Implements the space screen
 
 // XXX TODO: the wrap-around code is incomplete. the whole thing wraps when it gets to -STARFIELD_WIDTH, but it should also wrap the coordinates of stars that have already passed the boundary
@@ -6,11 +5,12 @@
 //To render text:
 
 /* lum is the inherent luminosity of the star
-   twinkle is the current offset from the base luminosity, and it ranges through 9 possible levels at a rate of period
- */
+   twinkle is the current offset from the base luminosity, and it ranges
+   through 9 possible levels at a rate of period
+*/
 
-STARFIELD_WIDTH = 1000
-STARFIELD_HEIGHT = 800
+STARFIELD_WIDTH = 1000;
+STARFIELD_HEIGHT = 800;
 
 /* todo: params on this (number of stars, rates) should be configurable */
 Starfield = function() {
@@ -35,20 +35,20 @@ Starfield = function() {
   //  twinklesine_table.push(Math.round(Math.sin(p)*17));
   //}
 
-  var starfield = {zoom: 1} //TODO: should listen to the zoom
+  var starfield = {zoom: 1}; //TODO: should listen to the zoom
   
   var narquee = 0 //the offset of the marqueeing starfield
   
-  var stars = []
-  var stars_n = Math.floor(350+Math.random()*350)
+  var stars = [];
+  var stars_n = Math.floor(350+Math.random()*350);
   //stars_n = 1
   for(i=0; i<stars_n; i++) {
-    stars.push(Star())
+    stars.push(Star());
   }
     
   starfield.draw = function() {
     var ctx = game.canvas.getContext('2d')
-    ctx.save()
+    ctx.save();
     ctx.globalAlpha = 1; //IMPORTANT, or else the previous draw won't work right
     ctx.fillStyle = "black";
     ctx.fillRect(0,0, game.canvas.width, game.canvas.height)
@@ -86,8 +86,7 @@ Starfield = function() {
 
 
 SpaceScene = function() { 
-  
-  starfield = Starfield()  
+  var starfield = Starfield();
   game.soundtrack.src = "space.ogg";
 
   return {
