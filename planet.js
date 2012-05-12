@@ -6,7 +6,7 @@
 Planet = function(world) {
   scrollY = scrollX = 0
   scrollDY = scrollDX = 0
-  scrollX=7*Gfx.tileWidth
+  
   function click(x,y) {
     //TODO: translate the click into a click on the world (need to factor in the viewport)
     //also if a disaster is selected pick that
@@ -39,10 +39,12 @@ Planet = function(world) {
     for(var row = startRow, screenY = -(scrollY % Gfx.tileHeight);
         row <= startRow + viewable_tiles.height+1;
         row++, screenY += Gfx.tileHeight) {
-      for(var col = startCol, screenX = -(scrollX % Gfx.tileWidth);
+      for(var col = startCol-1, screenX = -(scrollX % Gfx.tileWidth)-Gfx.tileWidth;
           col <= startCol + viewable_tiles.width; //+1 to catch the edge
           col++, screenX += Gfx.tileWidth) {
+        //try {
         drawTile(map.tileAt(row,col), screenX, screenY);
+        //} catch(e) { }
         //console.debug(row, col, map.tileAt(row, col))
       }
     }

@@ -37,13 +37,14 @@ Maps = (function(){
    */   
        map.height = 32;
        map.width = 32;
-       tilemap = new Array(map.height)
-       for(var row = 0; row < map.height; row++) {
+       tilemap = new Array(map.height*map.width) //row-major order!
+       for(var p = 0; p < tilemap.length; p++) tilemap[p] = 0
+       /*for(var row = 0; row < map.height; row++) {
          tilemap[row] = new Array(map.width);
          for(var col = 0; col < map.width; col++) {
            tilemap[row][col] = col % 2;
          }
-       }
+       }*/
     
     
     
@@ -52,13 +53,17 @@ Maps = (function(){
       if(!tilemap) return 0; //silently fail while the map is unloaded
       if(!(0<=row<map.height)) throw RangeError;
       if(!(0<=col<map.width)) throw RangeError;
-      return tilemap[row][col]
+      return tilemap[row*map.width+col]
     }
+    
     map.setTileAt = function(row, col, tile) {
       if(!tilemap) return;
-      tilemap[row][col] = tile;
+      if(!(0<=row<map.height)) throw RangeError;
+      if(!(0<=col<map.width)) throw RangeError;
+      tilemap[row*map.width + col] = tile;
     }
-
+    for(row=0; row<map.height; row++)
+      map.setTileAt(row, 0, 1)
     return map;
   }
 
