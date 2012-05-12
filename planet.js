@@ -23,6 +23,14 @@ Planet = function(world) {
     if(scrollY < 0) scrollY = 0;
     //if(scrollX > world.map.width*Gfx.tileWidth-Gfx.screenWidth()) scrollX = world.map.width*Gfx.tileWidth-Gfx.screenWidth()
     if(scrollY > world.map.height*Gfx.tileHeight-Gfx.screenHeight()) scrollY = world.map.height*Gfx.tileHeight-Gfx.screenHeight()
+
+    if(world.critters) {
+      for(i=0; i<world.critters.length; i++) {
+        var crt = world.critters[i]
+        crt.update()
+      }
+    }
+
   }
 
   //this is the number of tiles available onscreen at any moment
@@ -51,7 +59,23 @@ Planet = function(world) {
       }
     }
     
+
+    function mod(a,m) { a = a % m; if(a < 0) a+=m; return a }
+    function toScreenCoords(mapX, mapY) {
+      return {x: mod(mapX - scrollX, Gfx.screenWidth()), y: mapY - scrollY } //TODO: this should wrap with the world
+    }
+    
     //draw people
+    //world.critters = [{x: 10, y:100}, {x: 50, y:450}]
+    if(world.critters) {
+      for(i=0; i<world.critters.length; i++) {
+        var crt = world.critters[i]
+        p = toScreenCoords(crt.x, crt.y)
+        var ctx = Gfx.getCtx()
+        ctx.fillStyle = "red"
+        Gfx.fillCircle(p.x, p.y, 5)
+      }
+    }
     
     //draw structures
     

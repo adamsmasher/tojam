@@ -47,20 +47,27 @@ Maps = (function(){
        }*/
         
     map.tileAt = function(row, col) { //don't eat me for the indirection, Adam. I'm doing it because I don't trust your data representation and want it to be swappable
-      if(!tilemap) return 0; //silently fail while the map is unloaded
-      if(!(0<=row<map.height)) throw RangeError;
-      if(!(0<=col<map.width)) throw RangeError;
+      if(!tilemap) return -1; //silently fail while the map is unloaded
+      
+      col = col % map.width; //assumption: all our maps lock vertically and loop horizontally
+      if(col < 0) col += map.width; //in javascript, modulus gives the remainder on division, instead of doing what everyone else does
+      
+      if(!(0<=row<map.height)) return -1; //throw RangeError;
+      if(!(0<=col<map.width)) return -1; //throw RangeError;
       return tilemap[row*map.width+col]
     }
     
     map.setTileAt = function(row, col, tile) {
       if(!tilemap) return;
+      
+      
+      col = col % map.width; //assumption: all our maps lock vertically and loop horizontally
       if(!(0<=row<map.height)) throw RangeError;
       if(!(0<=col<map.width)) throw RangeError;
       tilemap[row*map.width + col] = tile;
     }
     for(row=0; row<map.height; row++) //debug: put a column of water down the way
-      map.setTileAt(row, 0, 1)
+      map.setTileAt(row, 0, 1);
     return map;
   }
 
