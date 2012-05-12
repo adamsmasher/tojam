@@ -1,29 +1,34 @@
 <html>
-<head>
-<title>Sxy Mufns' Game</title>
-<link rel="stylesheet" href="style.css">
+  <head>
+    <title>Sxy Mufns' Game</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <center>
+      <canvas width=800 height=608 id="canvas">
+        Sorry! You need a modern browser (e.g. Chrome or Firefox) to play this
+        game! No flash needed though :)
+      </canvas>
+    <center>
+    <!--must be first!-->
+    <script src="main.js"></script>
 
-<script src="main.js"></script> <!--must be first!-->
-	
-<!-- utility files -->
-<script src="debounce.js"></script>
-<script src="audio.js"></script>
-<script src="images.js"></script>
-<script src="gfx.js"></script>
-<script src="keys.js"></script>
-<script src="util.js"></script>
-
-<!-- models -->
-<script src="apes.js"></script>
-<script src="map.js"></script>
-<script src="worlds.js"></script>
-
-<!-- different views -->
-<script src="title.js"></script>
-<script src="planet.js"></script>
-<script src="space.js"></script>
-</head>
-
-<body><center><canvas width=800 height=500 id="canvas">Sorry! You need a modern browser (e.g. Chrome or Firefox) to play this game! No flash needed though :)</canvas><center>
-</body>
+    <!-- utility files -->
+    <script src="debounce.js"></script>
+    <script src="audio.js"></script>
+    <script src="images.js"></script>
+    <script src="gfx.js"></script>
+    <script src="keys.js"></script>
+    <script src="util.js"></script>
+    
+    <!-- models -->
+    <script src="apes.js"></script>
+    <script src="map.js"></script>
+    <script src="worlds.js"></script>
+    
+    <!-- different views -->
+    <script src="title.js"></script>
+    <script src="planet.js"></script>
+    <script src="space.js"></script>
+  </body>
 </html>

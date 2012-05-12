@@ -1,6 +1,7 @@
-
-
-/* notes: mediaGroup is for linking playback together, e.g. a video with its attendant audio stream. basically, it's not at all what we need, so leave it null */
+/* notes: mediaGroup is for linking playback together, e.g. a video with its
+          attendant audio stream. basically, it's not at all what we need, so
+          leave it null
+*/
 
 game.soundtrack = document.createElement("audio")
 game.soundtrack.setAttribute("id", "soundtrack")
