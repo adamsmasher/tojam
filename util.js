@@ -1,5 +1,13 @@
-
-/* a hurr durr javascript you suck */
-function randint(l, u) {
- return Math.floor(Math.random()*(u-l) + l)
+Util = {
+  randint: function(b, a) {
+    if(!a) {
+      a = 0;
+    }
+    else {
+      var t = b;
+      a = b;
+      b = t;
+    }
+    return Math.floor(Math.random()*(b-a) + a)
+ }
 }

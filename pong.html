@@ -1,6 +1,7 @@
 <html>
  <head>
  <title>htmljs test</title>
+ <script src="util.js"></script>
  <script type="application/javascript">
    DOM_VK_UP = 38;
    DOM_VK_DOWN = 40;
@@ -11,16 +12,11 @@
      setInterval("game.loop()", 20);
    }
    
-   function randint(b, a) {
-     if(!a) a = 0;
-       return Math.floor((Math.random()*(b-a)) + a);
-   }
-   
    function initGameState() {
      return {
        paddle1: makePaddle(16, 240-16, 64, 16),
        paddle2: makePaddle(640-32, 240-16, 64, 16),
-       ball: makeBall(320, 240, randint(4), randint(4), 8)
+       ball: makeBall(320, 240, Util.randint(4), Util.randint(4), 8)
      }
    }
    
