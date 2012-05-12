@@ -2,117 +2,117 @@
  <head>
  <title>htmljs test</title>
  <script type="application/javascript">
- DOM_VK_UP = 38;
- DOM_VK_DOWN = 40;
- 
- function init() {
- window.onkeydown = game.handleKeyDown;
- window.onkeyup = game.handleKeyUp;
- setInterval("game.loop()", 20);
- }
- 
- function randint(b, a) {
- if(!a) a = 0;
- return Math.floor((Math.random()*(b-a)) + a);
- }
- 
- function initGameState() {
- return {
- paddle1: makePaddle(16, 240-16, 64, 16),
- paddle2: makePaddle(640-32, 240-16, 64, 16),
- ball: makeBall(320, 240, randint(4), randint(4), 8)
- }
- }
- 
- function makePaddle(x, y, length, width) {
- return {
- x: x,
- y: y,
- dy: 0,
- length: length,
- width: width
- }
- }
- 
- function makeBall(x, y, dx, dy, radius) {
- return {
- x: x,
- y: y,
- dx: dx,
- dy: dy,
- radius: radius
- }
- }
- 
- game = (function() {
- var gameState = initGameState();
- return {
- loop: function() {
- update(gameState);
- draw(gameState);
- },
- handleKeyDown: function(evt) {
- if(evt.keyCode == DOM_VK_UP) {
- gameState.paddle1.dy = -4;
- }
- else if(evt.keyCode == DOM_VK_DOWN) {
- gameState.paddle1.dy = 4;
- }
- },
- handleKeyUp: function(evt) {
- if(evt.keyCode == DOM_VK_UP || evt.keyCode == DOM_VK_DOWN) {
- gameState.paddle1.dy = 0;
- }
- }
- }
- })()
- 
- function update(gameState) {
- updateBall(gameState.ball);
- updatePaddle(gameState.paddle1);
- updatePaddle(gameState.paddle2);
- }
- 
- function updateBall(ball) {
- ball.x += ball.dx;
- ball.y += ball.dy;
- }
- 
- function updatePaddle(paddle) {
- paddle.y += paddle.dy;
- }
- 
- function getCtx() {
- return document.getElementById('canvas').getContext('2d');
- }
- 
- function draw(gameState) {
- clearScreen();
- drawPaddle(gameState.paddle1);
- drawPaddle(gameState.paddle2);
- drawBall(gameState.ball);
- }
- 
- function clearScreen() {
- var ctx = getCtx();
- ctx.fillStyle = 'black';
- ctx.fillRect(0, 0, 640, 480);
- }
- 
- function drawPaddle(paddle) {
- var ctx = getCtx();
- ctx.fillStyle = 'white';
- ctx.fillRect(paddle.x, paddle.y, paddle.width, paddle.length);
- }
- 
- function drawBall(ball) {
- var ctx = getCtx();
- ctx.fillStyle = 'white';
- ctx.beginPath();
- ctx.arc(ball.x, ball.y, ball.radius, 0, 2 * Math.PI);
- ctx.closePath();
- ctx.fill();
- }
+   DOM_VK_UP = 38;
+   DOM_VK_DOWN = 40;
+   
+   function init() {
+     window.onkeydown = game.handleKeyDown;
+     window.onkeyup = game.handleKeyUp;
+     setInterval("game.loop()", 20);
+   }
+   
+   function randint(b, a) {
+     if(!a) a = 0;
+       return Math.floor((Math.random()*(b-a)) + a);
+   }
+   
+   function initGameState() {
+     return {
+       paddle1: makePaddle(16, 240-16, 64, 16),
+       paddle2: makePaddle(640-32, 240-16, 64, 16),
+       ball: makeBall(320, 240, randint(4), randint(4), 8)
+     }
+   }
+   
+   function makePaddle(x, y, length, width) {
+     return {
+       x: x,
+       y: y,
+       dy: 0,
+       length: length,
+       width: width
+     }
+   }
+   
+   function makeBall(x, y, dx, dy, radius) {
+     return {
+       x: x,
+       y: y,
+       dx: dx,
+       dy: dy,
+       radius: radius
+     }
+   }
+   
+   game = (function() {
+     var gameState = initGameState();
+     return {
+       loop: function() {
+         update(gameState);
+         draw(gameState);
+       },
+       handleKeyDown: function(evt) {
+         if(evt.keyCode == DOM_VK_UP) {
+           gameState.paddle1.dy = -4;
+         }
+         else if(evt.keyCode == DOM_VK_DOWN) {
+           gameState.paddle1.dy = 4;
+         }
+       },
+       handleKeyUp: function(evt) {
+         if(evt.keyCode == DOM_VK_UP || evt.keyCode == DOM_VK_DOWN) {
+           gameState.paddle1.dy = 0;
+         }
+       }
+     }
+   })()
+   
+   function update(gameState) {
+     updateBall(gameState.ball);
+     updatePaddle(gameState.paddle1);
+     updatePaddle(gameState.paddle2);
+   }
+   
+   function updateBall(ball) {
+     ball.x += ball.dx;
+     ball.y += ball.dy;
+   }
+   
+   function updatePaddle(paddle) {
+     paddle.y += paddle.dy;
+   }
+   
+   function getCtx() {
+     return document.getElementById('canvas').getContext('2d');
+   }
+   
+   function draw(gameState) {
+     clearScreen();
+     drawPaddle(gameState.paddle1);
+     drawPaddle(gameState.paddle2);
+     drawBall(gameState.ball);
+   }
+   
+   function clearScreen() {
+     var ctx = getCtx();
+     ctx.fillStyle = 'black';
+     ctx.fillRect(0, 0, 640, 480);
+   }
+   
+   function drawPaddle(paddle) {
+     var ctx = getCtx();
+     ctx.fillStyle = 'white';
+     ctx.fillRect(paddle.x, paddle.y, paddle.width, paddle.length);
+   }
+   
+   function drawBall(ball) {
+     var ctx = getCtx();
+     ctx.fillStyle = 'white';
+     ctx.beginPath();
+     ctx.arc(ball.x, ball.y, ball.radius, 0, 2 * Math.PI);
+     ctx.closePath();
+     ctx.fill();
+   }
  
  </script>
  </head>
