@@ -7,6 +7,7 @@ Pong = function() {
     }
   }
   function update(gameState) {
+    map[2][2] = 1;
   }
 
   function draw(gameState) {
@@ -25,7 +26,7 @@ Pong = function() {
   function drawTile(tileNum, row, col) {
     var ctx = Gfx.getCtx();
     var sx = Gfx.tileWidth * (tileNum % Images.tiles.tilesPerRow);
-    var sy = Gfx.tileHeight * (tileNum / Images.tiles.tilesPerRow);
+    var sy = Gfx.tileHeight * Math.floor(tileNum / Images.tiles.tilesPerRow);
     var dx = col * Gfx.tileWidth;
     var dy = row * Gfx.tileHeight;
     ctx.drawImage(Images.tiles, sx, sy, Gfx.tileWidth, Gfx.tileHeight, dx, dy, Gfx.tileWidth, Gfx.tileHeight);
