@@ -25,9 +25,7 @@ Maps = (function() {
       if(row < 0 || row >= map.height)
         throw RangeError;
 
-      col = col % map.width;
-      if(col < 0)
-        col = 32 + col;
+      col = Util.mod(col, map.width); //hardcode world-wrapping effect
 
       return tilemap[row * map.width + col];
     }
@@ -35,11 +33,9 @@ Maps = (function() {
     map.setTileAt = function(row, col, tile) {
       if(row < 0 || row >= map.height)
         throw RangeError;
-
-      col = col % map.width;
-      if(col < 0)
-        col = 32 + col;
-
+      
+      col = Util.mod(col, map.width); //hardcode world-wrapping effect
+      
       tilemap[row * map.width + col] = tile;
     }
 

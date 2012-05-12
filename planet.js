@@ -74,13 +74,9 @@ Planet = function(world) {
     var startRow = Math.floor(scrollY / Gfx.tileHeight);
     var startCol = Math.floor(scrollX / Gfx.tileWidth);
 
-    var screenXInit = scrollX % Gfx.tileWidth;
-    if(screenXInit < 0) {
-      screenXInit = Gfx.tileWidth + screenXInit;
-    }
-    screenXInit = -screenXInit;
+    screenXInit = -Util.mod(scrollX, Gfx.tileWidth) //screenXInit;
 
-    for(var row = startRow, screenY = -(scrollY % Gfx.tileHeight);
+    for(var row = startRow, screenY = -(Util.mod(scrollY, Gfx.tileHeight));
         row <= startRow + viewable_tiles.height;
         row++, screenY += Gfx.tileHeight) {
       for(var col = startCol, screenX = screenXInit;
@@ -94,7 +90,7 @@ Planet = function(world) {
   function drawTile(tileNum, dx, dy) {
     var tileType = Maps.TileTypes[tileNum]
     var ctx = Gfx.getCtx();
-    var sx = Gfx.tileWidth * (tileType.id % Images.tiles.tilesPerRow);
+    var sx = Gfx.tileWidth * Util.mod(tileType.id, Images.tiles.tilesPerRow);
     var sy =
       Gfx.tileHeight * Math.floor(tileType.id / Images.tiles.tilesPerRow);
 
