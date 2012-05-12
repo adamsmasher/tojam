@@ -23,8 +23,8 @@ Apes = (function() {
       ape.dx += ape.ax;
       ape.dy += ape.ay;
     
-      //ape.ax += (Math.random() - 0.5) / 1000
-      //ape.ay += (Math.random() - 0.5) / 1000
+      ape.ax += (Math.random() - 0.5) / 1000
+      ape.ay += (Math.random() - 0.5) / 1000
     }
     return ape;
   }

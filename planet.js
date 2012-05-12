@@ -52,7 +52,7 @@ Planet = function(world) {
   }
 
   function toScreenCoords(mapX, mapY) {
-    return {x: Util.mod(mapX - scrollX, Gfx.screenWidth()), y: mapY - scrollY } //TODO: this should wrap with the world
+    return {x: Util.mod(mapX - scrollX, Gfx.tileWidth*world.map.width), y: mapY - scrollY } //TODO: this should wrap with the world
   }
 
   
@@ -64,7 +64,7 @@ Planet = function(world) {
         var crt = world.critters[i]
         p = toScreenCoords(crt.x, crt.y)
         var ctx = Gfx.getCtx()
-        ctx.fillStyle = "red"
+        ctx.fillStyle = ["red", "green", "blue", "purple", "yellow", "grey", "black"][i]
         Gfx.fillCircle(p.x, p.y, 5)
       }
     }
