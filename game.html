@@ -7,6 +7,7 @@
 game = {}
 </script>
 <script src="debounce.js"></script>
+<script src="util.js"></script>
 <script src="audio.js"></script>
 
 <script src="space.js"></script>
@@ -22,21 +23,26 @@ function dickcloud() {
   limit = Math.random()*500
   for(i=0; i<limit; i++) {
     c.font = font();
+    c.globalAlpha = Math.random()*0.6 + 0.3;
     c.fillText("Dicks", Math.random()*game.canvas.width, Math.random()*game.canvas.height)
+    c.beginPath();
+    c.arc(Math.random()*game.canvas.width, Math.random()*game.canvas.height, Math.random()*6, 0, Math.PI)
+    c.closePath();
+     c.fill(); 
   }
 }
 
-resize = Cowboy.debounce(1, function() {
+
+resize = function() {
   game.canvas.width = window.innerWidth*0.97;
   game.canvas.height= window.innerHeight*0.97;
-  //		game.screen.draw()
-  dickcloud()
-  //game.canvas.getContext("2d").drawImage(game.nebula, 0, 0, game.canvas.width, game.canvas.height)
-});
+  //dickcloud();
+};
+resize = Cowboy.debounce(1, at_begin=true, resize);
 
 draw = function() {
-  game.screen.draw();
-hs}
+  game.scene.draw();
+}
 
 loop = function() {
   draw();
@@ -48,14 +54,12 @@ window.addEventListener("load", function ()
 {
 game.canvas = document.getElementById("screen");
 
-//game.screen = SpaceScreen
-//game.nebula = document.createElement("img")
-//game.nebula.src = "http://www.professorcloud.com/images/nebula/nebula.jpg"
+game.scene = SpaceScene()
 
 resize()
 
-//game.soundtrack.src = "http://kousu.ca/radio/mpd" //easy test! this should buffer and start autoplaying this file
-dickcloud()
+//dickcloud()
+setInterval("loop()", 20)
 });
 
 
