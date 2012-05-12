@@ -9,6 +9,10 @@ Gfx = function() {
       var ctx = getCtx();
       ctx.fillStyle = 'black';
       ctx.fillRect(0, 0, 640, 480);
-    }
+    },
+    tileWidth: 32,
+    tileHeight: 32,
+    screenWidth: 640,
+    screenHeight: 480
   }
 }();
