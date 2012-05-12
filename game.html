@@ -10,6 +10,7 @@ game = {}
 <script src="util.js"></script>
 <script src="audio.js"></script>
 
+<script src="gfx.js"></script>
 <script src="space.js"></script>
 <script src="planet.js"></script>
 
@@ -52,7 +53,7 @@ loop = function() {
 window.addEventListener("resize", resize)
 window.addEventListener("load", function ()
 {
-game.canvas = document.getElementById("screen");
+game.canvas = document.getElementById("canvas");
 
 game.scene = SpaceScene()
 
@@ -69,7 +70,7 @@ setInterval("loop()", 20)
 
 <center>
 
-<canvas id="screen">
+<canvas id="canvas">
  Sorry! You need a modern browser (e.g. Chrome or Firefox) to play this game! No flash though :)
 </canvas>
 </center>
