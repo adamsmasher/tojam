@@ -3,32 +3,42 @@
 Pong = function() {
   function initGameState() {
     return {
-      map: Map.initMap()
+      map: Map.initMap(),
+      scrollX: 0,
+      scrollY: 0,
+      scrollDX: 0,
+      scrollDY: 0
     }
   }
   function update(gameState) {
     map[2][2] = 1;
+    gameState.scrollX += gameState.scrollDX;
+    gameState.scrollY += gameState.scrollDY;
   }
 
   function draw(gameState) {
     Gfx.clearScreen();
-    drawBg(gameState.map);
+    drawBg(gameState.map, gameState.scrollX, gameState.scrollY);
   }
 
-  function drawBg(map) {
-    for(var row = 0; row < Gfx.screenHeight / Gfx.tileHeight; row++) {
-      for(var col = 0; col < Gfx.screenWidth / Gfx.tileWidth; col++) {
-        drawTile(map[row][col], row, col);
+  function drawBg(map, scrollX, scrollY) {
+    var startRow = Math.floor(scrollY / Gfx.tileHeight);
+    var startCol = Math.floor(scrollX / Gfx.tileWidth);
+    for(var row = startRow, screenY = -(scrollY % Gfx.tileHeight);
+        row <= startRow + Gfx.screenHeight / Gfx.tileHeight;
+        row++, screenY += Gfx.tileHeight) {
+      for(var col = startCol, screenX = -(scrollX % Gfx.tileHeight);
+          col <= startCol + Gfx.screenWidth / Gfx.tileWidth;
+          col++, screenX += Gfx.tileWidth) {
+        drawTile(map[row][col], screenX, screenY);
       }
     }
   }
 
-  function drawTile(tileNum, row, col) {
+  function drawTile(tileNum, dx, dy) {
     var ctx = Gfx.getCtx();
     var sx = Gfx.tileWidth * (tileNum % Images.tiles.tilesPerRow);
     var sy = Gfx.tileHeight * Math.floor(tileNum / Images.tiles.tilesPerRow);
-    var dx = col * Gfx.tileWidth;
-    var dy = row * Gfx.tileHeight;
     ctx.drawImage(Images.tiles, sx, sy, Gfx.tileWidth, Gfx.tileHeight, dx, dy, Gfx.tileWidth, Gfx.tileHeight);
   }
 
@@ -41,12 +51,24 @@ Pong = function() {
       },
       handleKeyDown: function(evt) {
         if(evt.keyCode == Keys.DOM_VK_UP) {
+          gameState.scrollDY = -1;
         }
         else if(evt.keyCode == Keys.DOM_VK_DOWN) {
+          gameState.scrollDY = 1;
+        }
+        else if(evt.keyCode == Keys.DOM_VK_LEFT) {
+          gameState.scrollDX = -1;
+        }
+        else if(evt.keyCode == Keys.DOM_VK_RIGHT) {
+          gameState.scrollDX = 1;
         }
       },
       handleKeyUp: function(evt) {
         if(evt.keyCode == Keys.DOM_VK_UP || evt.keyCode == Keys.DOM_VK_DOWN) {
+          gameState.scrollDY = 0;
+        }
+        else if(evt.keyCode == Keys.DOM_VK_LEFT || evt.keyCode == Keys.DOM_VK_RIGHT) {
+          gameState.scrollDX = 0;
         }
       }
     }
