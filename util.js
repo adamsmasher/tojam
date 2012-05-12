@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 /* a hurr durr javascript you suck */
 function randint(l, u) {
