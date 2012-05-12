@@ -42,10 +42,10 @@ Planet = function(world) {
         row <= startRow + viewable_tiles.height+1;
         row++, screenY += Gfx.tileHeight) {
       for(var col = startCol, screenX = -(scrollX % Gfx.tileWidth)-Gfx.tileWidth;
-          col <= startCol + viewable_tiles.width; //+1 to catch the edge
+          col <= startCol + viewable_tiles.width+1; //+1 to catch the edge
           col++, screenX += Gfx.tileWidth) {
         //try {
-        drawTile(map.tileAt(row,col), screenX, screenY);
+        drawTile(world.map.tileAt(row,col), screenX, screenY);
         //} catch(e) { }
         //console.debug(row, col, map.tileAt(row, col))
       }
