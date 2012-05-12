@@ -46,6 +46,7 @@ Starfield = function() {
   
   starfield.draw = function() {
     ctx = game.canvas.getContext('2d')
+    ctx.save()
     ctx.globalAlpha = 1; //IMPORTANT, or else the previous draw won't work right
     ctx.fillStyle = "black";
     ctx.fillRect(0,0, game.canvas.width, game.canvas.height)
@@ -65,6 +66,7 @@ Starfield = function() {
     for(i in stars) {
        drawStar(stars[i]);
     }
+    ctx.restore()
   }
   
   function update() {
