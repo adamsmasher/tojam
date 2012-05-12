@@ -4,8 +4,10 @@
 //scenes contain viewport
 
 Planet = function(world) {
-  scrollY = scrollX = 0
-  scrollDY = scrollDX = 0
+  var scrollY = 0
+  var scrollX = 0
+  var scrollDY = 0
+  var scrollDX = 0
   
   function click(x,y) {
     //TODO: translate the click into a click on the world (need to factor in the viewport)
@@ -24,7 +26,7 @@ Planet = function(world) {
   }
 
   //this is the number of tiles available onscreen at any moment
-  viewable_tiles = {width: Gfx.screenWidth() / Gfx.tileWidth, height: Gfx.screenHeight() / Gfx.tileHeight}
+  var viewable_tiles = {width: Gfx.screenWidth() / Gfx.tileWidth, height: Gfx.screenHeight() / Gfx.tileHeight}
   
   function draw() {
     //a world *has* to come with a map
@@ -33,13 +35,13 @@ Planet = function(world) {
     
     //draw map
     //XXX map should wrap horizontally but not vertically <-- loren can do this
-    startRow = Math.floor(scrollY / Gfx.tileHeight);
-    startCol = Math.floor(scrollX / Gfx.tileWidth);
+    var startRow = Math.floor(scrollY / Gfx.tileHeight);
+    var startCol = Math.floor(scrollX / Gfx.tileWidth);
     //console.debug(startCol)
     for(var row = startRow, screenY = -(scrollY % Gfx.tileHeight);
         row <= startRow + viewable_tiles.height+1;
         row++, screenY += Gfx.tileHeight) {
-      for(var col = startCol-1, screenX = -(scrollX % Gfx.tileWidth)-Gfx.tileWidth;
+      for(var col = startCol, screenX = -(scrollX % Gfx.tileWidth)-Gfx.tileWidth;
           col <= startCol + viewable_tiles.width; //+1 to catch the edge
           col++, screenX += Gfx.tileWidth) {
         //try {
@@ -57,7 +59,7 @@ Planet = function(world) {
   }
 
   function drawTile(tileNum, dx, dy) {
-    T = Maps.TileTypes[tileNum]
+    var T = Maps.TileTypes[tileNum]
     //if(!T) alert(tileNum)
     var ctx = Gfx.getCtx();
     var sx = Gfx.tileWidth * (T.id % Images.tiles.tilesPerRow);
@@ -66,30 +68,29 @@ Planet = function(world) {
   }
 
 
-      function keyDown(evt) {
-        if(evt.keyCode == Keys.DOM_VK_UP) {
-          scrollDY = -Gfx.tileHeight/15;
-        }   
-        else if(evt.keyCode == Keys.DOM_VK_DOWN) {
-          scrollDY = Gfx.tileHeight/15;
-        }
-        else if(evt.keyCode == Keys.DOM_VK_LEFT) {
-          scrollDX = -Gfx.tileWidth/15;
-        }
-        else if(evt.keyCode == Keys.DOM_VK_RIGHT) {
-          scrollDX = Gfx.tileWidth/15;
-        }
-      }
-
-      function keyUp(evt) {   
-        if(evt.keyCode == Keys.DOM_VK_UP || evt.keyCode == Keys.DOM_VK_DOWN) {
-          scrollDY = 0;
-        }
-        else if(evt.keyCode == Keys.DOM_VK_LEFT || evt.keyCode == Keys.DOM_VK_RIGHT) {
-          scrollDX = 0;                                                                                                                                       
-        }
-      }
-
+  function keyDown(evt) {
+    if(evt.keyCode == Keys.DOM_VK_UP) {
+      scrollDY = -Gfx.tileHeight/15;
+    }   
+    else if(evt.keyCode == Keys.DOM_VK_DOWN) {
+      scrollDY = Gfx.tileHeight/15;
+    }
+    else if(evt.keyCode == Keys.DOM_VK_LEFT) {
+      scrollDX = -Gfx.tileWidth/15;
+    }
+    else if(evt.keyCode == Keys.DOM_VK_RIGHT) {
+      scrollDX = Gfx.tileWidth/15;
+    }
+  }
+  
+  function keyUp(evt) {   
+    if(evt.keyCode == Keys.DOM_VK_UP || evt.keyCode == Keys.DOM_VK_DOWN) {
+      scrollDY = 0;
+    }
+  else if(evt.keyCode == Keys.DOM_VK_LEFT || evt.keyCode == Keys.DOM_VK_RIGHT) {
+      scrollDX = 0;                                                                                                                                       
+    }
+  }
          
   return {
     keyDown: keyDown,  

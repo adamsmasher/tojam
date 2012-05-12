@@ -10,7 +10,7 @@ randint: function(l, u) {
 },
 
 sum: function(l) {
- o = 0;
+ var o = 0;
  for(i=0; i<l.length; i++) o+=l[i];
  return o;
 },

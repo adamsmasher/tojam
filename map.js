@@ -2,21 +2,21 @@
 // requires Gfx, Keys, Images, Map
 
 Maps = (function(){
-  Tile = function(name, id) { return { name: name, id: id} }
-  TileTypes = [Tile("Grass", 0), Tile("Water", 1)] //used as an associative array!
+  function Tile(name, id) { return { name: name, id: id} }
+  var TileTypes = [Tile("Grass", 0), Tile("Water", 1)] //used as an associative array!
 
-  Map = function(path) {
+  function Map(path) {
     // todo: make map size parameterizable?
     // todo: use a memoryview and pack our maps tight
     // todo: load maps as images and onto a canvas, and access them by tiles
-    map = {}
+    var map = {}
     
 /* security policy breaks this:
-    tilemap = null;
-    img = new Image();
+    var tilemap = null;
+    var img = new Image();
     img.onload = function() {
   
-       loaded = true;
+       var loaded = true;
        map.width = img.width;
        map.height = img.height-1;
        img.crossOrigin = true;
@@ -37,7 +37,7 @@ Maps = (function(){
    */   
        map.height = 32;
        map.width = 32;
-       tilemap = new Array(map.height*map.width) //row-major order!
+       var tilemap = new Array(map.height*map.width) //row-major order!
        for(var p = 0; p < tilemap.length; p++) tilemap[p] = 0
        /*for(var row = 0; row < map.height; row++) {
          tilemap[row] = new Array(map.width);
@@ -45,10 +45,7 @@ Maps = (function(){
            tilemap[row][col] = col % 2;
          }
        }*/
-    
-    
-    
-    
+        
     map.tileAt = function(row, col) { //don't eat me for the indirection, Adam. I'm doing it because I don't trust your data representation and want it to be swappable
       if(!tilemap) return 0; //silently fail while the map is unloaded
       if(!(0<=row<map.height)) throw RangeError;
@@ -62,7 +59,7 @@ Maps = (function(){
       if(!(0<=col<map.width)) throw RangeError;
       tilemap[row*map.width + col] = tile;
     }
-    for(row=0; row<map.height; row++)
+    for(row=0; row<map.height; row++) //debug: put a column of water down the way
       map.setTileAt(row, 0, 1)
     return map;
   }

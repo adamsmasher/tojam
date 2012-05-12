@@ -1,10 +1,8 @@
 
 
-game = {}; //global game object
-
-
 (function() {
-framerate = 60 //blah blah blah
+game = {}; //global game object
+var framerate = 60 //blah blah blah
 
 
 
@@ -12,8 +10,8 @@ function dickcloud() {
   function font() {
     return Math.floor((Math.random()*30 + 3)) + "px serif";
   }
-  c = game.canvas.getContext('2d')
-  limit = Math.random()*500
+  var c = game.canvas.getContext('2d')
+  var limit = Math.random()*500
   for(i=0; i<limit; i++) {
     c.font = font();
     c.globalAlpha = Math.random()*0.6 + 0.3;
