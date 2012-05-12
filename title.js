@@ -52,6 +52,7 @@ TitleScene = function() {
     },
     click: function(x,y) {
       //should move to the next scene
+      game.scene = Planet(Worlds.Earth)
     },
     draw: function() {
       starfield.draw()

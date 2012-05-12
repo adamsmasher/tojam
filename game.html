@@ -1,71 +1,29 @@
 <html>
 <head>
 <title>Sxy Mufns' Game</title>
-
 <link rel="stylesheet" href="style.css">
-<script>
-game = {}
-</script>
+
+<script src="main.js"></script> <!--must be first!-->
+
+<!-- utility files -->
 <script src="debounce.js"></script>
-<script src="util.js"></script>
 <script src="audio.js"></script>
-
+<script src="images.js"></script>
 <script src="gfx.js"></script>
+<script src="keys.js"></script>
+<script src="util.js"></script>
+
+<!-- models -->
+<script src="map.js"></script>
+<script src="worlds.js"></script>
+<script src="apes.js"></script>
+
+<!-- different views -->
 <script src="title.js"></script>
-<script src="space.js"></script>
 <script src="planet.js"></script>
-
-<script>
-
-function dickcloud() {
-  function font() {
-    return Math.floor((Math.random()*30 + 3)) + "px serif";
-  }
-  c = game.canvas.getContext('2d')
-  limit = Math.random()*500
-  for(i=0; i<limit; i++) {
-    c.font = font();
-    c.globalAlpha = Math.random()*0.6 + 0.3;
-    c.fillText("Dicks", Math.random()*game.canvas.width, Math.random()*game.canvas.height)
-    c.beginPath();
-    c.arc(Math.random()*game.canvas.width, Math.random()*game.canvas.height, Math.random()*6, 0, Math.PI)
-    c.closePath();
-     c.fill(); 
-  }
-}
-
-
-resize = function() {
-  game.canvas.width = window.innerWidth*0.984;
-  game.canvas.height= window.innerHeight*0.983338;
-  //dickcloud();
-};
-resize = Cowboy.debounce(1, at_begin=true, resize);
-
-loop = function() {
-  game.scene.update()
-  game.scene.draw();
-}
-
-window.addEventListener("resize", resize)
-window.addEventListener("load", function ()
-{
-game.canvas = document.getElementById("canvas");
-
-game.scene = SpaceScene()
-game.scene = TitleScene()
-
-resize()
-
-setInterval("loop()", 20)
-});
-
-
-</script>
-
+<script src="space.js"></script>
 </head>
-<body><canvas id="canvas" style="padding: none">
- Sorry! You need a modern browser (e.g. Chrome or Firefox) to play this game! No flash though :)
-</canvas>
+
+<body><center><canvas width=800 height=500 id="canvas">Sorry! You need a modern browser (e.g. Chrome or Firefox) to play this game! No flash needed though :)</canvas><center>
 </body>
 </html>

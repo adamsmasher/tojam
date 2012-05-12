@@ -1,6 +1,8 @@
 
 //Implements the space screen
 
+// XXX TODO: the wrap-around code is incomplete. the whole thing wraps when it gets to -STARFIELD_WIDTH, but it should also wrap the coordinates of stars that have already passed the boundary
+
 //To render text:
 
 /* lum is the inherent luminosity of the star

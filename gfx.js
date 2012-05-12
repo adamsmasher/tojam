@@ -14,6 +14,8 @@ Gfx = function() {
     ctx.fill()
   }
 
+  screenWidth = function() { return getCanvas().width }
+  screenHeight = function() { return getCanvas().height }
 
   return {
     getCanvas: getCanvas,
@@ -22,11 +24,11 @@ Gfx = function() {
     clearScreen: function() {
       var ctx = getCtx();
       ctx.fillStyle = 'black';
-      ctx.fillRect(0, 0, 640, 480);
+      ctx.fillRect(0, 0, screenWidth(), screenHeight());
     },
     tileWidth: 32,
     tileHeight: 32,
-    screenWidth: 640,
-    screenHeight: 480
+    screenWidth: screenWidth,
+    screenHeight: screenHeight
   }
 }();
