@@ -20,19 +20,20 @@ Starfield = function() {
       lum: Util.randint(1,4),
       
       twinkle: Util.randint(0,9),
-      period: Util.randint(1,5)*2
+      period: Util.randint(0,4)*2 + 1
     }
   }
   
+
+  function twinklesine(i) {
+    return Math.sin(Math.PI*2*i/500) * 25 / 100;
+    
+  }
+  //precomputing option:
   //twinklesine_table = []
   //for(p=0; p<Math.PI*2; p+=Math.PI*2 / 100) {
   //  twinklesine_table.push(Math.round(Math.sin(p)*17));
   //}
-  function twinklesine(i) {
-    return Math.sin(Math.PI*2*i/500) * 25 / 100;
-    return twinklesine_table[i % twinklesine_table.length] / 10;
-    
-  }
 
   starfield = {zoom: 1} //TODO: should listen to the zoom
   
@@ -40,10 +41,11 @@ Starfield = function() {
   
   stars = []
   stars_n = Math.floor(350+Math.random()*350)
+  //stars_n = 1
   for(i=0; i<stars_n; i++) {
     stars.push(Star())
   }
-  
+    
   starfield.draw = function() {
     ctx = game.canvas.getContext('2d')
     ctx.save()
@@ -69,19 +71,14 @@ Starfield = function() {
     ctx.restore()
   }
   
-  function update() {
-      for(var i in starfield) {
-        s = starfield[i]
+  starfield.update = function() {
+      for(var i in stars) {
+        s = stars[i]
         s.twinkle = (s.twinkle+s.period)
       }
       narquee-=.1;
       if(narquee < -STARFIELD_WIDTH) narquee = STARFIELD_WIDTH;
   }
-  
- 
-  update_timer = setInterval(update, 10) //this should be cancelled later on somehow? or maybe use repeated setTimeouts instead, so that if it doesn't get called it stops getting called
-  
-  //clearInterval(update_timer) //uhhh, when do we do this?
   
   return starfield
 }
@@ -94,6 +91,9 @@ SpaceScene = function() {
   game.soundtrack.src = "space.ogg";
 
   return {
+    update: function() {
+      starfield.update()
+    },
     click: function(x,y) {
     
     },

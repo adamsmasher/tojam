@@ -9,6 +9,11 @@ randint: function(l, u) {
  return Math.floor(Math.random()*(u-l) + l)
 },
 
+sum: function(l) {
+ o = 0;
+ for(i=0; i<l.length; i++) o+=l[i];
+ return o;
+},
 
 /* for debugging, mostly */
 sleep: function(milliseconds) {

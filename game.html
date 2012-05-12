@@ -11,6 +11,7 @@ game = {}
 <script src="audio.js"></script>
 
 <script src="gfx.js"></script>
+<script src="title.js"></script>
 <script src="space.js"></script>
 <script src="planet.js"></script>
 
@@ -35,19 +36,15 @@ function dickcloud() {
 
 
 resize = function() {
-  game.canvas.width = window.innerWidth*0.97;
-  game.canvas.height= window.innerHeight*0.97;
+  game.canvas.width = window.innerWidth*0.984;
+  game.canvas.height= window.innerHeight*0.983338;
   //dickcloud();
 };
 resize = Cowboy.debounce(1, at_begin=true, resize);
 
-draw = function() {
-  game.scene.draw();
-}
-
 loop = function() {
-  draw();
-  
+  game.scene.update()
+  game.scene.draw();
 }
 
 window.addEventListener("resize", resize)
@@ -56,6 +53,7 @@ window.addEventListener("load", function ()
 game.canvas = document.getElementById("canvas");
 
 game.scene = SpaceScene()
+game.scene = TitleScene()
 
 resize()
 
@@ -66,14 +64,8 @@ setInterval("loop()", 20)
 </script>
 
 </head>
-<body>
-
-<center>
-
-<canvas id="canvas">
+<body><canvas id="canvas" style="padding: none">
  Sorry! You need a modern browser (e.g. Chrome or Firefox) to play this game! No flash though :)
 </canvas>
-</center>
-
 </body>
 </html>

@@ -1,6 +1,9 @@
 Gfx = function() {
+  function getCanvas() {
+     return document.getElementById('canvas')
+  }
   function getCtx() {
-     return document.getElementById('canvas').getContext('2d');
+     return getCanvas().getContext('2d');
   }
 
   function fillCircle(x,y,radius) {
@@ -13,6 +16,7 @@ Gfx = function() {
 
 
   return {
+    getCanvas: getCanvas,
     getCtx: getCtx,
     fillCircle: fillCircle,
     clearScreen: function() {
