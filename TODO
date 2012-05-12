@@ -23,3 +23,4 @@ javascripts:
  -use addEventListener not setting onclick
  -use appendChild() not insertBefore
  use (function() { ... })(); to create a private namespace
+ -use localStorage to store datas
