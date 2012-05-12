@@ -1,4 +1,6 @@
 Keys = {
+  DOM_VK_LEFT: 37,
   DOM_VK_UP: 38,
+  DOM_VK_RIGHT: 39,
   DOM_VK_DOWN: 40
 };
