@@ -25,6 +25,7 @@ Planet = function(world) {
     
     updateCritters();
     updateGems();
+    updateLava();
   }
 
   function updatePlayer() {
@@ -77,6 +78,31 @@ Planet = function(world) {
       }
     }
   }
+
+  function updateLava() {
+    function safeSetTile(row, col, tile) {
+      try {
+        world.map.setTileAt(row, col, tile);
+      } catch (e) {
+        ;
+      }
+    }
+    // TODO: what is lava?
+    var lava = 0;
+    if(frame % 20 == 0) {
+      for(var row = 0; row < world.map.height; row++) {
+        for(var col = 0; col < world.map.width; col++) {
+          if(world.map.tileAt(row, col) == lava) {
+            safeSetTile(row - 1, col, lava);
+            safeSetTile(row + 1, col, lava);
+            safeSetTile(row, col - 1, lava);
+            safeSetTile(row, col + 1, lava);
+          }
+        }
+      }
+    }
+  }
+
   function drawGems() {
     for(i=0; i<world.gems.length; i++) {
       var ctx = Gfx.getCtx();
