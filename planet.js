@@ -27,16 +27,16 @@ Planet = function(world) {
   }
 
   function updatePlayer() {
-    if(upPressed) {
+    if(upPressed && world.map.canWalk(playerRow - 1, playerCol)) {
       playerRow--;
     }
-    if(downPressed) {
+    if(downPressed && world.map.canWalk(playerRow + 1, playerCol)) {
       playerRow++;
     }
-    if(leftPressed) {
+    if(leftPressed && world.map.canWalk(playerRow, playerCol - 1)) {
       playerCol--;
     }
-    if(rightPressed) {
+    if(rightPressed && world.map.canWalk(playerRow, playerCol + 1)) {
       playerCol++;
     }
   }
