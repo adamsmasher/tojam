@@ -1,7 +1,9 @@
 (function() {
   game = {}; //global game object
+  dbg = document.getElementById('dbg')
+  
   var framerate = 20 //blah blah blah
-
+  
   function resize() {
     game.canvas.width = window.innerWidth*0.984;
     game.canvas.height= window.innerHeight*0.983338;
