@@ -40,7 +40,7 @@ Apes = (function() {
       ape.ay = 0
       ape.ay += 50/sq(0 - ape.y)
       ape.ay -= 50/sq(Gfx.screenHeight() - ape.y)
-      //console.debug(ape.ay)
+      
       ape.ax = (Math.random() - 0.5) / 5
       ape.ay += (Math.random() - 0.5) / 10
     }

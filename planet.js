@@ -90,7 +90,7 @@ Planet = function(world) {
   function drawTile(tileNum, dx, dy) {
     var tileType = Maps.TileTypes[tileNum];
     var ctx = Gfx.getCtx();
-    id = tileType.ids[Math.floor(frame / 5) % tileType.ids.length]
+    id = tileType.ids[Math.floor(frame / 8) % tileType.ids.length]
     var sx = Gfx.tileWidth * Util.mod(id, Images.tiles.tilesPerRow);
     var sy =
       Gfx.tileHeight * Math.floor(id / Images.tiles.tilesPerRow);
