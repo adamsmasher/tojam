@@ -1,5 +1,6 @@
 (function() {
   game = {}; //global game object
+  
   var framerate = 45 //blah blah blah
 
   function dickcloud() {
@@ -37,6 +38,7 @@
 
   function keyDown(evt) {
     if(game.scene.keyDown) game.scene.keyDown(evt)
+    return false;
   }
   function keyUp(evt) {
     if(game.scene.keyUp) game.scene.keyUp(evt)
@@ -45,9 +47,14 @@
   //window.addEventListener("resize", resize)
 
   window.addEventListener("load", function () {
+    
+    game.score = 10 //collected gemstones
+    game.health = 100 //percentage
+    
     game.canvas = document.getElementById("canvas");
     //resize()
     game.canvas.addEventListener("click", click)
+    //window.onkeydown = function() { return false; } //freezes the rest of the DOM from intercepting keypresses
     window.addEventListener("keydown", keyDown) //weird, event names are case-sensitive
     window.addEventListener("keyup", keyUp)
     game.scene = TitleScene()
