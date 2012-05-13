@@ -42,17 +42,43 @@ Planet = function(world) {
   function draw() {
     Gfx.clearScreen();
     drawMap();
-   
+    
+    
+    
     //draw people
     drawPeople();
     
     //draw structures
     
     //draw disasters?
+    
+    drawScores()
+  }
+  
+  function drawScores() {
+    var ctx = Gfx.getCtx();
+    ctx.save();
+    text = "Gems: " + game.score.toString();
+    ctx.globalAlpha = 1;
+    ctx.font = "20px Helvetica"
+    ctx.fillStyle = "yellow"
+    ctx.shadowColor = "rgba(170,0,150,255)"
+    ctx.shadowOffsetX = 0
+    ctx.shadowOffsetY = 1
+    //ctx.shadow
+    ctx.shadowBlur = 3
+    
+    ctx.fillText(text, 10, 10+10+20)
+
+    //draw health
+    ctx.fillText("Health: ", 10, 10+10)
+    //ctx.fill
+    
+    ctx.restore();
   }
 
   function toScreenCoords(mapX, mapY) {
-    return {x: Util.mod(mapX - scrollX, Gfx.tileWidth*world.map.width), y: mapY - scrollY } //TODO: this should wrap with the world
+    return {x: Util.mod(mapX - scrollX, Gfx.tileWidth*world.map.width), y: mapY - scrollY }
   }
 
   
