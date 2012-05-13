@@ -8,7 +8,7 @@
 
 Worlds = (function() {
   World = function(name, map) {
-    return { name: name, map: map, toString: function() { return name }, critters: [] }
+    return { name: name, map: map, toString: function() { return name }, critters: [], gems: [] }
   }
   var earth = World("Earth", Maps.Map("maps/earth.png"))
   earth.critters.push(Apes.Ape())
@@ -26,7 +26,9 @@ Worlds = (function() {
 
   earth.critters.push(Apes.Ape())
   earth.critters[3].x = 530; 
-  earth.critters[3].y = 310; 
+  earth.critters[3].y = 310;
+  
+  earth.gems.push(Gem(3, 10,10))
   
   return {
     Earth: earth

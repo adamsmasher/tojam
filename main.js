@@ -28,7 +28,7 @@
 
   window.addEventListener("load", function () {
     
-    game.score = 10 //collected gemstones
+    game.gems = 10 //collected gemstones
     game.health = 100 //percentage
     
     game.canvas = document.getElementById("canvas");

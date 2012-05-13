@@ -24,6 +24,7 @@ Planet = function(world) {
     updateScroll();
     
     updateCritters();
+    updateGems();
   }
 
   function updatePlayer() {
@@ -66,12 +67,24 @@ Planet = function(world) {
       }
     }
   }
-
-  
-  var gems = []
   
   function updateGems() {
-    if(true) {}
+    for(i=0; i<world.gems.length; i++) {
+      g = world.gems[i]
+      if(g.x == playerCol && g.y == playerRow) {
+        game.gems+=1
+        world.gems.pop(i)
+      }
+    }
+  }
+  function drawGems() {
+    for(i=0; i<world.gems.length; i++) {
+      var ctx = Gfx.getCtx();
+      g = world.gems[i]
+      var coords = toScreenCoords(g.x * Gfx.tileWidth,
+                                  g.y * Gfx.tileHeight);
+      ctx.drawImage(Images.gems[g.type], coords.x, coords.y);
+    }
   }
 
   //this is the number of tiles available onscreen at any moment
@@ -84,20 +97,24 @@ Planet = function(world) {
     Gfx.clearScreen();
     drawMap();
    
-    drawPlayer();
-    drawCritters();
     
     //draw structures
     
     //draw disasters?
     
-    drawScores()
+
+    drawGems();
+
+    drawCritters();
+    drawPlayer(); //and this should probably be second last
+
+    drawScores(); //make sure this is last
   }
   
   function drawScores() {
     var ctx = Gfx.getCtx();
     ctx.save();
-    text = "Gems: " + game.score.toString();
+    text = "Gems: " + game.gems.toString();
     ctx.globalAlpha = 1;
     ctx.font = "20px Helvetica"
     ctx.fillStyle = "yellow"
@@ -167,12 +184,7 @@ Planet = function(world) {
     var tileType = Maps.TileTypes[tileNum];
     var ctx = Gfx.getCtx();
     id = tileType.ids[Math.floor(frame / 8) % tileType.ids.length]
-    var sx = Gfx.tileWidth * Util.mod(id, Images.tiles.tilesPerRow);
-    var sy =
-      Gfx.tileHeight * Math.floor(id / Images.tiles.tilesPerRow);
-
-    ctx.drawImage(Images.tiles, sx, sy, Gfx.tileWidth, Gfx.tileHeight,
-      dx, dy, Gfx.tileWidth, Gfx.tileHeight);
+    ctx.drawImage(Images.getTile(id), dx, dy);
   }
 
   function keyDown(evt) {
