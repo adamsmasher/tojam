@@ -78,6 +78,35 @@ Planet = function(world) {
     //draw structures
     
     //draw disasters?
+    
+    drawScores()
+  }
+  
+  function drawScores() {
+    var ctx = Gfx.getCtx();
+    ctx.save();
+    text = "Gems: " + game.score.toString();
+    ctx.globalAlpha = 1;
+    ctx.font = "20px Helvetica"
+    ctx.fillStyle = "yellow"
+    ctx.shadowColor = "rgba(170,0,150,255)"
+    ctx.shadowOffsetX = 0
+    ctx.shadowOffsetY = 1
+    //ctx.shadow
+    ctx.shadowBlur = 3
+    
+    //TODO: for fancy: draw gems as glyphs if gems < 5
+    ctx.fillText(text, 10, 10+10+20)
+    
+    //draw health
+    text = "Health: "
+    w = ctx.measureText(text)
+    ctx.fillText(text, 10, 10+10)
+    ctx.fillStyle = "red"
+    w.height = 20 //durr, TextMetrics doesn't give heights? bitch!
+    ctx.fillRect(w.width+8, 10, game.health, 10)
+    
+    ctx.restore();
   }
 
   function toScreenCoords(mapX, mapY) {

@@ -1,9 +1,13 @@
 Gfx = function() {
+  var _canvas = null;
+  var _ctx = null;
   function getCanvas() {
-     return document.getElementById('canvas')
+     if(!_canvas) _canvas = document.getElementById('canvas'); //DOM access is slow, memoize
+     return _canvas;
   }
   function getCtx() {
-     return getCanvas().getContext('2d');
+     if(!_ctx) _ctx = getCanvas().getContext('2d');
+     return _ctx;
   }
 
   function fillCircle(x,y,radius) {

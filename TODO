@@ -1,17 +1,23 @@
+
+
+
+Immediate:
+ -be able to click on planets to go to them (and zoom out)
+ -render buildings. have a basic build tree.
+ -render disasters
+ -give critters moods, like 'wander', 'fear', 
+
+------------
 	
 Big TODO: prototype shit where shit needs prototyping. there's a lot of uselessly copied functions floating around.
 
-cache the canvas object to avoid DOM calls
+cache the canvas (and context?) object to avoid DOM calls
 
 TODO: starcraft-style mouse scrolling controls
-
-Bug Logan and Annamaria for Graphics
 
 See if audio can come as data urls. And if so, can we just embed the soundtrack as strings?
 
 Cloud effects
-Tiling map engine
-Space screen!!!!!!!!
 
 preloader
 

@@ -11,8 +11,10 @@ Maps = (function() {
   }
    //XXX wrong file for this?
    //trick: by repeating frame numbers, we can slow down the animation
-  var TileTypes = [TileType("water", [0,0,1,2,2,3,3,4,5,5]),
-                   TileType("grass", 11),
+  var TileTypes = [TileType("grass", 12),
+                   TileType("water", [0,1,2,3,4,5]),
+                   TileType("intensegrass", 12),
+                   TileType("goatonapole", 11),
                    TileType("mountainHigh", 6), TileType("mountainMed", 7), TileType("mountainLow", 8),
                    TileType("volcano", [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 10, 10, 10, 10, 10, 10, 10])];
 
