@@ -1,6 +1,8 @@
 	
 Big TODO: prototype shit where shit needs prototyping. there's a lot of uselessly copied functions floating around.
 
+cache the canvas object to avoid DOM calls
+
 TODO: starcraft-style mouse scrolling controls
 
 Bug Logan and Annamaria for Graphics
