@@ -1,6 +1,6 @@
 (function() {
   game = {}; //global game object
-  var framerate = 60 //blah blah blah
+  var framerate = 45 //blah blah blah
 
   function dickcloud() {
     function font() {

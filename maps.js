@@ -1,13 +1,18 @@
 // requires Gfx, Keys, Images, Map
 
 Maps = (function() {
-  function TileType(name, id) {
+  function TileType(name, ids) {
+    if(ids.length) { }
+    else { ids = [ids] }
     return {
       name: name,
-      id: id
+      ids: ids
     }
   }
-  var TileTypes = [TileType("Grass", 0), TileType("Water", 1)];
+  var TileTypes = [TileType("water", [0,1,2,3,4,5]),
+                   TileType("grass", 11),
+                   TileType("mountainHigh", 6), TileType("mountainMed", 7), TileType("mountainLow", 8),
+                   TileType("volcano", [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 10, 10, 10, 10, 10, 10, 10])]; //XXX wrong file for this?
 
   function Map(path) {
     // todo: make map size parameterizable?
@@ -41,7 +46,7 @@ Maps = (function() {
 
     //debug: put a column of water down the side
     for(row=0; row<map.height; row++) {
-      map.setTileAt(row, 0, 1);
+      map.setTileAt(row, 0, 5);
     }
     return map;
   }
