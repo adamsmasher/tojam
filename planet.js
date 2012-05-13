@@ -27,19 +27,19 @@ Planet = function(world) {
   }
 
   function updatePlayer() {
-    if(upPressed) {
+    if(upPressed && world.map.canWalk(playerRow - 1, playerCol)) {
       playerRow--;
       playerRow = Math.max(playerRow, 0)
     }
-    if(downPressed) {
+    if(downPressed && world.map.canWalk(playerRow + 1, playerCol)) {
       playerRow++;
       playerRow = Math.min(playerRow, world.map.height-1)
     }
-    if(leftPressed) {
+    if(leftPressed && world.map.canWalk(playerRow, playerCol - 1)) {
       playerCol--;
       playerCol = Util.mod(playerCol, world.map.width)
     }
-    if(rightPressed) {
+    if(rightPressed && world.map.canWalk(playerRow, playerCol + 1)) {
       playerCol++;
       playerCol = Util.mod(playerCol, world.map.width)	
     }

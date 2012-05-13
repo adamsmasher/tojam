@@ -48,6 +48,14 @@ Maps = (function() {
       tilemap[row * map.width + col] = tile;
     }
 
+    map.canWalk = function(row, col) {
+      try {
+        return map.tileAt(row, col) == 0;
+      } catch(e) {
+        return false;
+      }
+    }
+
     //debug: put a column of water down the side
     for(row=0; row<map.height; row++) {
       map.setTileAt(row, 0, 5);
