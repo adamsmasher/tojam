@@ -3,7 +3,7 @@ Images = function() {
     tiles: new Image()
   };
 
-  imgs.tiles.src = "tiles.png";
+  imgs.tiles.src = "images/tiles.png";
   imgs.tiles.tilesPerRow = 8;
 
   return imgs;

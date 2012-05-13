@@ -11,8 +11,10 @@ Planet = function(world) {
     //      the viewport)
     // also if a disaster is selected at the time of the click, handle it
   }
-
+  
+  var frame = 0; //count frames. XXX this hsould be done elsewhere
   function update() {
+    frame+=1;
     scrollX += scrollDX;
     scrollY += scrollDY;
     
@@ -30,8 +32,6 @@ Planet = function(world) {
       }
     }
   }
-  
-  
   
   //this is the number of tiles available onscreen at any moment
   var viewable_tiles = {
@@ -88,11 +88,12 @@ Planet = function(world) {
   }
 
   function drawTile(tileNum, dx, dy) {
-    var tileType = Maps.TileTypes[tileNum]
+    var tileType = Maps.TileTypes[tileNum];
     var ctx = Gfx.getCtx();
-    var sx = Gfx.tileWidth * Util.mod(tileType.id, Images.tiles.tilesPerRow);
+    id = tileType.ids[Math.floor(frame / 8) % tileType.ids.length]
+    var sx = Gfx.tileWidth * Util.mod(id, Images.tiles.tilesPerRow);
     var sy =
-      Gfx.tileHeight * Math.floor(tileType.id / Images.tiles.tilesPerRow);
+      Gfx.tileHeight * Math.floor(id / Images.tiles.tilesPerRow);
 
     ctx.drawImage(Images.tiles, sx, sy, Gfx.tileWidth, Gfx.tileHeight,
       dx, dy, Gfx.tileWidth, Gfx.tileHeight);
