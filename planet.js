@@ -1,10 +1,15 @@
 // a Scene that renders the world
 
 Planet = function(world) {
-  var scrollY = 0;
-  var scrollX = 0;
-  var scrollDY = 0;
-  var scrollDX = 0;
+  var playerRow = 0;
+  var playerCol = 0;
+
+  var upPressed = false;
+  var downPressed = false;
+  var leftPressed = false;
+  var rightPressed = false;
+
+  var frame = 0; //count frames. XXX this hsould be done elsewhere
   
   function click(x,y) {
     //TODO: translate the click into a click on the world (need to factor in
@@ -12,19 +17,43 @@ Planet = function(world) {
     // also if a disaster is selected at the time of the click, handle it
   }
   
-  var frame = 0; //count frames. XXX this hsould be done elsewhere
   function update() {
-    frame+=1;
-    scrollX += scrollDX;
-    scrollY += scrollDY;
+    frame++;
+
+    updatePlayer();
+    updateScroll();
     
+    updateCritters();
+  }
+
+  function updatePlayer() {
+    if(upPressed) {
+      playerRow--;
+    }
+    if(downPressed) {
+      playerRow++;
+    }
+    if(leftPressed) {
+      playerCol--;
+    }
+    if(rightPressed) {
+      playerCol++;
+    }
+  }
+
+  function updateScroll() {
+    scrollX = playerCol * Gfx.tileWidth - Gfx.screenWidth()/2;
+    scrollY = playerRow * Gfx.tileHeight - Gfx.screenHeight()/2;
+
     //clamp the edges of the viewport
     if(scrollY < 0)
       scrollY = 0;
-    if(scrollY > world.map.height * Gfx.tileHeight - Gfx.screenHeight()) {
-      scrollY = world.map.height * Gfx.tileHeight - Gfx.screenHeight();
+    if(scrollY >= world.map.height * Gfx.tileHeight - Gfx.screenHeight()) {
+      scrollY = world.map.height * Gfx.tileHeight - Gfx.screenHeight() - 1;
     }
+  }
 
+  function updateCritters() {
     if(world.critters) {
       for(i=0; i<world.critters.length; i++) {
         var crt = world.critters[i]
@@ -32,7 +61,7 @@ Planet = function(world) {
       }
     }
   }
-  
+
   //this is the number of tiles available onscreen at any moment
   var viewable_tiles = {
     width: Gfx.screenWidth() / Gfx.tileWidth,
@@ -43,8 +72,8 @@ Planet = function(world) {
     Gfx.clearScreen();
     drawMap();
    
-    //draw people
-    drawPeople();
+    drawPlayer();
+    drawCritters();
     
     //draw structures
     
@@ -52,21 +81,27 @@ Planet = function(world) {
   }
 
   function toScreenCoords(mapX, mapY) {
-    return {x: Util.mod(mapX - scrollX, Gfx.tileWidth*world.map.width), y: mapY - scrollY } //TODO: this should wrap with the world
+    return {
+      x: Util.mod(mapX - scrollX, Gfx.tileWidth*world.map.width),
+      y: mapY - scrollY
+    } //TODO: this should wrap with the world
   }
 
-  
-  function drawPeople() {
-    //draw people
-    //world.critters = [{x: 10, y:100}, {x: 50, y:450}]
-    if(world.critters) {
-      for(i=0; i<world.critters.length; i++) {
-        var crt = world.critters[i]
-        p = toScreenCoords(crt.x, crt.y)
-        var ctx = Gfx.getCtx()
-        ctx.fillStyle = ["red", "green", "blue", "purple", "yellow", "grey", "black"][i]
-        Gfx.fillCircle(p.x, p.y, 5)
-      }
+  function drawPlayer() {
+    var ctx = Gfx.getCtx();
+    var coords = toScreenCoords(playerCol * Gfx.tileWidth,
+                                playerRow * Gfx.tileHeight);
+    ctx.drawImage(Images.player, coords.x, coords.y);
+  }
+
+  function drawCritters() {
+    for(i = 0; i < world.critters.length; i++) {
+      var crt = world.critters[i];
+      p = toScreenCoords(crt.x, crt.y);
+      var ctx = Gfx.getCtx();
+      ctx.fillStyle = 
+        ["red", "green", "blue", "purple", "yellow", "grey", "black"][i];
+      Gfx.fillCircle(p.x, p.y, 5);
     }
   }
 
@@ -101,27 +136,31 @@ Planet = function(world) {
 
   function keyDown(evt) {
     if(evt.keyCode == Keys.DOM_VK_UP) {
-      scrollDY = -2;
+      upPressed = true;
     }   
     else if(evt.keyCode == Keys.DOM_VK_DOWN) {
-      scrollDY = 2;
+      downPressed = true;
     }
     else if(evt.keyCode == Keys.DOM_VK_LEFT) {
-      scrollDX = -2;
+      leftPressed = true;
     }
     else if(evt.keyCode == Keys.DOM_VK_RIGHT) {
-      scrollDX = 2;
+      rightPressed = true;
     }
   }
   
   function keyUp(evt) {   
-    if(evt.keyCode == Keys.DOM_VK_UP || evt.keyCode == Keys.DOM_VK_DOWN) {
-      scrollDY = 0;
+    if(evt.keyCode == Keys.DOM_VK_UP) {
+      upPressed = false;
+    }   
+    else if(evt.keyCode == Keys.DOM_VK_DOWN) {
+      downPressed = false;
     }
-    else if(evt.keyCode == Keys.DOM_VK_LEFT ||
-            evt.keyCode == Keys.DOM_VK_RIGHT)
-    {
-      scrollDX = 0;
+    else if(evt.keyCode == Keys.DOM_VK_LEFT) {
+      leftPressed = false;
+    }
+    else if(evt.keyCode == Keys.DOM_VK_RIGHT) {
+      rightPressed = false;
     }
   }
          
