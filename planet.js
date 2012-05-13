@@ -29,16 +29,21 @@ Planet = function(world) {
   function updatePlayer() {
     if(upPressed) {
       playerRow--;
+      playerRow = Math.max(playerRow, 0)
     }
     if(downPressed) {
       playerRow++;
+      playerRow = Math.min(playerRow, world.map.height-1)
     }
     if(leftPressed) {
       playerCol--;
+      playerCol = Util.mod(playerCol, world.map.width)
     }
     if(rightPressed) {
       playerCol++;
+      playerCol = Util.mod(playerCol, world.map.width)	
     }
+    dbg.textContent = "(" + playerCol + ", " + playerRow + ")"
   }
 
   function updateScroll() {
@@ -60,6 +65,13 @@ Planet = function(world) {
         crt.update()
       }
     }
+  }
+
+  
+  var gems = []
+  
+  function updateGems() {
+    if(true) {}
   }
 
   //this is the number of tiles available onscreen at any moment
