@@ -87,7 +87,7 @@ Starfield = function() {
 
 SpaceScene = function() { 
   var starfield = Starfield();
-  game.soundtrack.src = "space.ogg";
+  game.soundtrack.src = "music/space.ogg";
 
   return {
     update: function() {
